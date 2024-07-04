@@ -24,7 +24,7 @@ def insort_right(arr, val, lo=0, hi=None):
 
 
 if __name__ == '__main__':
-    arr = list(map(int), input().rstrip().split())
+    arr = list(map(int, input().rstrip().split()))
     val = int(input().strip())
 
     left_idx = search_left(arr, val)
