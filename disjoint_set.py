@@ -12,7 +12,9 @@ class DisjointSet:
         return tdx
 
     def union(self, idx, jdx):
+        if idx == jdx: return
         iparent, jparent = self.find(idx), self.find(jdx)
+        if iparent == jparent: return
         if self.rank[iparent] > self.rank[jparent]:
             self.parent[jparent] = iparent
         elif self.rank[iparent] < self.rank[jparent]:
