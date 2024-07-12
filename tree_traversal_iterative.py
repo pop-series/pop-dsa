@@ -30,6 +30,36 @@ def postOrder(root):
                 stack = (curr, True), stack
                 curr = curr.right
 
+def postOrderWithStack(root):
+    curr, stack = root, None
+    outStack = None
+    while curr or stack:
+        if curr:
+            outStack = curr.data, outStack
+            stack = curr, stack
+            curr = curr.right
+        else:
+            curr, stack = stack
+            curr = curr.left
+    while outStack:
+        data, outStack = outStack
+        print(data, end=', ')
+
+def postOrderWithPrev(root):
+    prev, curr, stack = None, root, None
+    while curr or stack:
+        if curr:
+            stack = curr, stack
+            prev, curr = None, curr.left
+        else:
+            curr, stack = stack
+            if prev == curr.right:
+                print(curr.data, end=', ')
+                prev, curr = curr, None
+            else:
+                stack = curr, stack
+                prev, curr = None, curr.right
+
 def inOrder(root):
     curr, stack = root, None
     while curr or stack:
@@ -67,9 +97,11 @@ if __name__ == '__main__':
     preOrder(troot), print('')
 
     exp_postOrder = [23, 1, 71, 6, 12, 4, 90, 13, 11, 15, 17, 20, 6, 8]
-    print('postOrder (exp, actual)')
+    print('postOrder (exp, actual, actual+stack, actual+prev)')
     print(exp_postOrder)
     postOrder(troot), print('')
+    postOrderWithStack(troot), print('')
+    postOrderWithPrev(troot), print('')
 
     exp_inOrder = [11, 23, 1, 12, 6, 71, 13, 4, 90, 8, 15, 6, 20, 17]
     print('inOrder(exp, actual)')
